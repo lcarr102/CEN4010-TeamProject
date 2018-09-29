@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { BookService } from '../../services/book/book.service';
+import { Router, Params } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { BookInterface } from '../../components/book/book.model';
 
 @Component({
   selector: 'app-book',
@@ -7,8 +10,32 @@ import { BookService } from '../../services/book/book.service';
   styleUrls: ['./book.component.css']
 })
 export class BookComponent implements OnInit {
+  
+  searchForm: FormGroup;
+  errorMessage: string: = '';
+  $scope.book: BookInterface;
 
-  constructor(private bookService: BookService) { }
+  constructor(
+    private bookService: BookService,
+	private router: Router,
+	private fb: FormBuilder
+  ) { 
+    this.createForm();
+  }
+  
+  createForm() {
+    this.searchForm = this.fb.group({
+      id: ['', Validators.required ]
+    });
+  }
+  
+  trySearch(value) {
+    $scope.book = this.bookService.findById(value)
+    .then(err => {
+	console.log(err);
+	this.errorMessage = err.message;
+	})
+  }
 
   ngOnInit() {
   }

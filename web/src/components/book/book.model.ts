@@ -8,3 +8,7 @@ export class BookInterface {
     genre: string;
     topSeller: boolean;
 }
+
+export interface SelectableBook extends BookInterface {
+    isSelected: boolean;
+}
