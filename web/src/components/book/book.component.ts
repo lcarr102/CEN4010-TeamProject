@@ -12,8 +12,9 @@ import { BookInterface } from '../../components/book/book.model';
 export class BookComponent implements OnInit {
   
   searchForm: FormGroup;
-  errorMessage: string: = '';
-  $scope.book: BookInterface;
+  errorMessage: string = 'check it';
+  public bookID: string = 'empty';
+  book: BookInterface;
 
   constructor(
     private bookService: BookService,
@@ -30,11 +31,11 @@ export class BookComponent implements OnInit {
   }
   
   trySearch(value) {
-    $scope.book = this.bookService.findById(value)
-    .then(err => {
-	console.log(err);
-	this.errorMessage = err.message;
-	})
+    //this.book = this.bookService.findById(value)
+	this.bookService.findById(value).subscribe(result => {
+	  this.book = result;
+	  });
+	return this.book.id; 
   }
 
   ngOnInit() {
