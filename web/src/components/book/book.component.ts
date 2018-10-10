@@ -13,8 +13,21 @@ export class BookComponent implements OnInit {
   
   searchForm: FormGroup;
   errorMessage: string = 'check it';
-  public bookID: string = 'empty';
-  book: BookInterface;
+  public bookID: string = 'i like karin a lot, right';
+  
+  //book: BookInterface;
+  //book.id: bookID;
+  bookTest1:BookInterface = {
+    id: "",
+    title: "A Feast for Crows",
+    author: "George R. R. Martin",
+    price: 15.29,
+    rating: 4.2,
+    releaseDate: new Date("November 1, 2005 12:00:00"),
+    genre: "Fantasy",
+    topSeller: true
+  }
+  //bookTest1:BookInterface = {id: this.bookID}
 
   constructor(
     private bookService: BookService,
@@ -33,10 +46,13 @@ export class BookComponent implements OnInit {
   trySearch(value) {
     //this.book = this.bookService.findById(value)
 	this.bookService.findById(value).subscribe(result => {
-	  this.book = result;
+	  this.bookTest1 = result;
 	  });
-	return this.book.id; 
+	return this.bookTest1; 
   }
+  
+  
+  
 
   ngOnInit() {
   }

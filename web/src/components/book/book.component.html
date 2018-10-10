@@ -5,8 +5,12 @@
           <label>Search by ID</label>
           <input formControlName="id" class="form-control">
         </div>
-        <button type="submit" (click)="trySearch(searchForm.value)" class="btn btn-default">Search</button>
+        <button type="submit" (click)="this.bookTest1 = this.trySearch(searchForm.value)" class="btn btn-default">Search</button>
       </form>
     </div>
   </div>
-{{bookID}}
+
+
+<div class="col-md-6 col-md-offset-3">
+{{bookTest1.id}}
+</div>
